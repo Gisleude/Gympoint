@@ -54,7 +54,8 @@ class StudentController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { email, id } = req.body;
+    const { email } = req.body;
+    const { id } = req.params;
 
     const student = await Student.findOne({ where: { id } });
 

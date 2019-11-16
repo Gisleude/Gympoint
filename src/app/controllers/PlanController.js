@@ -51,7 +51,8 @@ class PlanController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { id, title } = req.body;
+    const { title } = req.body;
+    const { id } = req.params;
 
     const plan = await Plan.findOne({ where: { id } });
 

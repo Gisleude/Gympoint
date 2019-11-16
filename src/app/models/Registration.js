@@ -1,6 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import { parseISO, addMonths } from 'date-fns';
-import Plan from './Plan';
 
 class Registration extends Model {
   static init(sequelize) {
@@ -16,16 +14,6 @@ class Registration extends Model {
         sequelize,
       }
     );
-
-    this.addHook('beforeUpdate', async registration => {
-      const plan = await Plan.findOne({ where: { id: this.plan_id } });
-
-      const start_date_formatted = parseISO(this.start_date);
-
-      registration.end_date = addMonths(start_date_formatted, plan.duration);
-
-      registration.price = plan.duration * plan.price;
-    });
 
     return this;
   }
