@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import Mail from '../../lib/Mail';
 
 class RegistrationMail {
@@ -18,7 +19,13 @@ class RegistrationMail {
       context: {
         plan_name: plan.title,
         student: checkStudentExists.name,
-        date: format(parseISO(registration.end_date), "MMMM dd ', at ' H:mm"),
+        date: format(
+          parseISO(registration.end_date),
+          "dd ' de 'MMMM', às ' H:mm",
+          {
+            locale: pt,
+          }
+        ),
         price: registration.price,
       },
     });
